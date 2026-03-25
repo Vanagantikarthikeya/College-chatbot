@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage FAQs - Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A;
+            color: #ffffff;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav {
+            background: rgba(30, 58, 138, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #FBBF24;
+        }
+
+        .container {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 97%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: rgba(37, 99, 235, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background-color: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+        }
+
+        .success {
+            color: #34d399;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: #f87171;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pattern-list,
+        .response-list {
+            margin-top: 10px;
+        }
+
+        .pattern-item,
+        .response-item {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .pattern-item input,
+        .response-item input {
+            flex: 1;
+            margin-right: 5px;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr {
+            transition: background-color 0.2s;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .intent-tag {
+            color: #60a5fa;
+            font-weight: bold;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: inline-block;
+        }
+
+        option {
+            background-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Manage FAQs</h1>
+    </div>
+    <div class="nav">
+        <a href="{{ url_for('admin_dashboard') }}">Home</a>
+        <a href="{{ url_for('admin_queries') }}">Unanswered Queries</a>
+        <a href="{{ url_for('admin_manage_faq') }}">Manage FAQs</a>
+        <a href="{{ url_for('admin_upload_documents') }}">Upload Documents</a>
+        <a href="{{ url_for('admin_analytics') }}">Analytics</a>
+        <a href="{{ url_for('admin_logout') }}" style="color: #ffcccb;">Logout</a>
+    </div>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- Add New FAQ Section -->
+        <div class="section">
+            <h2>Add New FAQ</h2>
+            <form action="{{ url_for('admin_add_faq') }}" method="post">
+                <label>Intent Tag (unique identifier):</label>
+                <input type="text" name="tag" placeholder="e.g., scholarship_info" required>
+
+                <label>Question Patterns (one per line):</label>
+                <textarea name="patterns"
+                    placeholder="How to apply for scholarship?&#10;Scholarship eligibility criteria&#10;Types of scholarships available"
+                    required></textarea>
+
+                <label>Responses (one per line):</label>
+                <textarea name="responses"
+                    placeholder="Scholarships are available for meritorious students...&#10;You can apply for scholarships through the official portal..."
+                    required></textarea>
+
+                <button type="submit">Add FAQ</button>
+            </form>
+        </div>
+
+        <!-- Edit Existing FAQ Section -->
+        <div class="section">
+            <h2>Edit Existing FAQ</h2>
+            <form action="{{ url_for('admin_edit_faq') }}" method="post">
+                <label>Select Intent to Edit:</label>
+                <select name="tag" required>
+                    <option value="">-- Select Intent --</option>
+                    {% for intent in intents %}
+                    <option value="{{ intent.tag }}">{{ intent.tag }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>New Question Patterns (one per line, will replace existing):</label>
+                <textarea name="patterns" placeholder="Enter new patterns or leave blank to keep existing"></textarea>
+
+                <label>New Responses (one per line, will replace existing):</label>
+                <textarea name="responses" placeholder="Enter new responses or leave blank to keep existing"></textarea>
+
+                <button type="submit">Update FAQ</button>
+            </form>
+        </div>
+
+        <!-- Delete FAQ Section -->
+        <div class="section">
+            <h2>Delete FAQ</h2>
+            <form action="{{ url_for('admin_delete_faq') }}" method="post"
+                onsubmit="return confirm('Are you sure you want to delete this FAQ?');">
+                <label>Select Intent to Delete:</label>
+                <select name="tag" required>
+                    <option value="">-- Select Intent --</option>
+                    {% for intent in intents %}
+                    <option value="{{ intent.tag }}">{{ intent.tag }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="btn-delete">Delete FAQ</button>
+            </form>
+        </div>
+
+        <!-- View All FAQs Section -->
+        <div class="section">
+            <h2>All FAQs ({{ intents|length }} total)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Intent Tag</th>
+                        <th>Patterns Count</th>
+                        <th>Responses Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for intent in intents %}
+                    <tr>
+                        <td class="intent-tag">{{ intent.tag }}</td>
+                        <td>{{ intent.patterns|length }}</td>
+                        <td>{{ intent.responses|length }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

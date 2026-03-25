@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Helpdesk | Pallavi Engineering College</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Shared Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pallavi Engineering College Logo"
+                    style="height: 50px; width: auto; display: block;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('helpdesk') }}" class="active">Student Helpdesk</a></li>
+            <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" style="margin-top: 1rem;">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>AI Student Assistant</h2>
+                <p>Hello! Ask me about admissions, fees, or academics.</p>
+            </div>
+
+            <div class="chat-messages" id="chatbox">
+                <div class="msg bot">Welcome to Pallavi Engineering College help center. How can I assist you today?
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off">
+                <button onclick="getResponse()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Pallavi Engineering College | Student Intelligence Services</p>
+        </div>
+    </footer>
+
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('userInput');
+
+        async function getResponse() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Display user message
+            addMessage(message, 'user');
+            userInput.value = '';
+
+            try {
+                const response = await fetch('/get-response', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+
+                // Add tiny delay for realism
+                setTimeout(() => {
+                    addMessage(data.response, 'bot');
+                }, 500);
+
+            } catch (error) {
+                addMessage("I'm having trouble connecting at the moment. Please try again.", 'bot');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `msg ${sender}`;
+            msgDiv.textContent = text;
+            chatbox.appendChild(msgDiv);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getResponse();
+        });
+    </script>
+
+</body>
+
+</html>

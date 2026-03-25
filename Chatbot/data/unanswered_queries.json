@@ -1,0 +1,144 @@
+[
+    {
+        "id": "29e15aa4-0a33-471e-ae1c-48fc97a3821d",
+        "query": "what is the airspeed of a swallow",
+        "confidence": "low_confidence",
+        "timestamp": "2026-02-06 15:00:41",
+        "status": "unanswered"
+    },
+    {
+        "id": "711e42f8-e277-43a3-acfa-084c3307e941",
+        "query": "what is the airspeed of a swallow",
+        "confidence": "low_confidence",
+        "timestamp": "2026-02-06 15:01:42",
+        "status": "unanswered"
+    },
+    {
+        "id": "af17d0e5-cd4d-4583-8396-f90d2645df2b",
+        "query": "What are the admission requirements?",
+        "confidence": "0.40739033569409516",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:01",
+        "status": "unanswered"
+    },
+    {
+        "id": "f3bc0ff9-f52d-4922-84a6-31d27728ea12",
+        "query": "Tell me about placements",
+        "confidence": "0.295129947926185",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:01",
+        "status": "unanswered"
+    },
+    {
+        "id": "5aada196-a85d-4c0b-a924-5d2bc8c40f2a",
+        "query": "xyzabc123nonsense",
+        "confidence": "0.11999811777775295",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:01",
+        "status": "unanswered"
+    },
+    {
+        "id": "9194b658-19a5-422e-bfd7-83a3edb8e56a",
+        "query": "What are the admission requirements?",
+        "confidence": "0.40739033569409516",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:30",
+        "status": "unanswered"
+    },
+    {
+        "id": "c560600b-87d4-4aaf-b5bc-bef216cde2a8",
+        "query": "Tell me about placements",
+        "confidence": "0.295129947926185",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:30",
+        "status": "unanswered"
+    },
+    {
+        "id": "60780723-c28e-466c-879e-cfa42f7bd63d",
+        "query": "xyzabc123nonsense",
+        "confidence": "0.11999811777775295",
+        "source": "none",
+        "timestamp": "2026-02-06 15:33:30",
+        "status": "unanswered"
+    },
+    {
+        "id": "3966efe7-566e-476d-849a-55d49a6a4da6",
+        "query": "hlo",
+        "confidence": "0.11999811777775295",
+        "source": "none",
+        "timestamp": "2026-02-06 15:36:51",
+        "status": "unanswered"
+    },
+    {
+        "id": "104b2af7-cfa6-4b4a-bf6f-70c4650de9b3",
+        "query": "what type of courses",
+        "confidence": "0.4494541850049626",
+        "source": "none",
+        "timestamp": "2026-02-06 15:38:02",
+        "status": "unanswered"
+    },
+    {
+        "id": "d3e8982e-5afe-4def-983b-94c1d5157fa6",
+        "query": "what si the officail website",
+        "confidence": "0.09937318204778499",
+        "source": "none",
+        "timestamp": "2026-02-06 15:40:16",
+        "status": "unanswered"
+    },
+    {
+        "id": "b5da83c4-d8b5-41a2-b4d5-6f37dd02d943",
+        "query": "What are the admission requirements?",
+        "confidence": "0.4073903356940954",
+        "source": "none",
+        "timestamp": "2026-02-12 16:44:47",
+        "status": "unanswered"
+    },
+    {
+        "id": "eccf9e6b-902e-4f17-a860-38c137c16161",
+        "query": "<script>alert('XSS')</script>",
+        "confidence": "0.11999811777775289",
+        "source": "none",
+        "timestamp": "2026-02-12 16:46:41",
+        "status": "unanswered"
+    },
+    {
+        "id": "c47865bc-c90d-4987-be2b-16b1e18148a1",
+        "query": "This is a very long message to test the character limit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "confidence": "0.005287906440105785",
+        "source": "none",
+        "timestamp": "2026-02-12 16:46:58",
+        "status": "unanswered"
+    },
+    {
+        "id": "07491773-e46b-4c2b-a5eb-feb84b967fae",
+        "query": "Can I get my course schedule?",
+        "confidence": "0.018170810780878757",
+        "source": "none",
+        "timestamp": "2026-02-12 16:47:16",
+        "status": "unanswered"
+    },
+    {
+        "id": "5b3b39da-a186-4c1f-bf93-9203b86a1d3e",
+        "query": "What about scholarships? \ud83c\udf93",
+        "confidence": "0.06800372365328813",
+        "source": "none",
+        "timestamp": "2026-02-12 16:47:47",
+        "status": "unanswered"
+    },
+    {
+        "id": "f4b3041f-5b8f-4ca9-acf7-41973a0a7149",
+        "query": "what ar ethe cost",
+        "confidence": "0.52708652913058",
+        "source": "none",
+        "timestamp": "2026-02-13 22:15:41",
+        "status": "unanswered"
+    },
+    {
+        "id": "a53abccd-0288-459a-b06a-1c088f868a26",
+        "query": "annual day",
+        "confidence": "0.43304318241987644",
+        "source": "document",
+        "timestamp": "2026-03-17 22:11:21",
+        "status": "unanswered"
+    }
+]

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Pallavi Engineering College</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('admin_dashboard') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+                    alt="Pallavi Engineering College Admin Logo"
+                    style="height: 50px; width: auto; display: block; border-radius: 5px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('admin_dashboard') }}" class="active">Dashboard</a></li>
+            <li><a href="{{ url_for('admin_logout') }}" style="color: #ffcccb;">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 style="color: var(--primary-color); text-align: center; margin-bottom: 3rem;">College Management Dashboard
+        </h1>
+
+        <div class="admin-grid">
+            <a href="{{ url_for('admin_analytics') }}" class="admin-card">
+                <h2>📊 Analytics</h2>
+                <p>View query performance, success rates, and user engagement insights.</p>
+            </a>
+            <a href="{{ url_for('admin_knowledge') }}" class="admin-card">
+                <h2>📚 Knowledge Base</h2>
+                <p>Manage FAQ intents and upload reference documents for the AI engine.</p>
+            </a>
+        </div>
+
+        <section class="section" style="margin-top: 5rem; text-align: center;">
+            <p>Welcome back, Administrator. Use the tools above to maintain and improve the college intelligence system.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Admin Management Portal | Pallavi Engineering College</p>
+    </footer>
+
+</body>
+
+</html>

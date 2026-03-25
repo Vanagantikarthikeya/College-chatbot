@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - College Helpdesk</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 40px 30px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus {
+            border-color: rgba(37, 99, 235, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Admin Authentication</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="error">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('admin_login') }}" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="{{ url_for('home') }}">Back to Chatbot</a></p>
+    </div>
+</body>
+
+</html>

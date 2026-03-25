@@ -1,0 +1,376 @@
+/* Global Design System for Pallavi Engineering College Website */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    --primary-color: #1E3A8A;
+    /* Deep Navy Blue */
+    --secondary-color: #2563EB;
+    /* Royal Blue */
+    --accent-color: #FBBF24;
+    /* Academic Gold */
+    --text-color: #111827;
+    /* Dark Text */
+    --bg-color: #F9FAFB;
+    /* Soft Light Gray */
+    --white: #ffffff;
+    --gray-light: #F3F4F6;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.12);
+    --transition: all 0.3s ease;
+    --border-radius: 14px;
+    --nav-border-radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--white);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, rgba(30, 58, 138, 0.4), rgba(37, 99, 235, 0.25)),
+        url('../static/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 120px 20px;
+    text-align: center;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .hero h1 {
+        font-size: 56px;
+    }
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+}
+
+/* Layout Containers */
+.container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+/* Sections */
+.section {
+    background: var(--white);
+    padding: 50px 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 4rem;
+    border-left: 5px solid var(--accent-color);
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    margin-top: 0.75rem;
+    border-radius: 2px;
+}
+
+/* Grid Components */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    border-top: none;
+    /* removed old top border */
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* Chatbot Page */
+.chat-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: var(--white);
+    border-radius: 20px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.msg {
+    max-width: 75%;
+    padding: 1rem 1.5rem;
+    border-radius: 18px;
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+}
+
+.msg.bot {
+    background: var(--gray-light);
+    color: var(--text-color);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.msg.user {
+    background: var(--secondary-color);
+    color: var(--white);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-input {
+    padding: 1.5rem;
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    gap: 1rem;
+    background: var(--white);
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 30px;
+    outline: none;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+}
+
+.chat-input input:focus {
+    border-color: var(--secondary-color);
+}
+
+.chat-input button {
+    background: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 0 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+
+.chat-input button:hover {
+    background: var(--primary-color);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.8);
+    transform: scale(1.05);
+}
+
+/* Admin Dashboard Elements Backup */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.admin-card {
+    background: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.admin-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--nav-border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 3rem 1rem;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+footer .footer-content p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .section {
+        padding: 30px 1.5rem;
+    }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallavi Engineering College | Excellence in Education</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Shared Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pallavi Engineering College Logo"
+                    style="height: 50px; width: auto; display: block;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+            <li><a href="{{ url_for('helpdesk') }}">Student Helpdesk</a></li>
+            <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Empowering the Next Generation of Leaders</h1>
+        <p>A legacy of academic excellence, innovation, and holistic development since 1995. Explore our world-class
+            campus and state-of-the-art facilities.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- About Section -->
+        <section class="section">
+            <h2 class="section-title">About the College</h2>
+            <p>Pallavi Engineering College is a premier institution dedicated to providing
+                world-class technical education. Affiliated to state technical universities and approved by AICTE, we
+                pride ourselves on our rigorous academic programs and student-centric approach.</p>
+            <p>Our curriculum is designed to meet industry standards, supported by experienced faculty and high-tech
+                research labs. We foster an environment of critical thinking and creative problem-solving.</p>
+        </section>
+
+        <!-- Stats Grid -->
+        <div class="grid">
+            <div class="card">
+                <h3>Affiliation</h3>
+                <p>Affiliated to State Technical University, recognized globally for academic standards.</p>
+            </div>
+            <div class="card">
+                <h3>Accreditations</h3>
+                <p>AICTE Approved | NBA Accredited programs ensuring quality education.</p>
+            </div>
+            <div class="card">
+                <h3>Location</h3>
+                <p>Located in the heart of Innovation City, easily accessible and safe campus environment.</p>
+            </div>
+        </div>
+
+        <!-- Image Gallery / Facilities -->
+        <section class="section" style="margin-top: 5rem;">
+            <h2 class="section-title">Our Campus Facilities</h2>
+            <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="card"
+                    style="height: 250px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary-color);">
+                    Main Auditorium</div>
+                <div class="card"
+                    style="height: 250px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary-color);">
+                    Digital Library</div>
+                <div class="card"
+                    style="height: 250px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); background-image: url({{ url_for('static', filename='images/robotics_lab.jpg') }}); background-size: cover; background-position: center;">
+                    Robotics Lab</div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Shared Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Pallavi Engineering College</h3>
+            <p>123 Innovation Drive, Tech Park Area, State-560001</p>
+            <p>&copy; 2026 Pallavi Engineering College. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

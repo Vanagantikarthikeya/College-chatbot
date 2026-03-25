@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unanswered Queries - Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A;
+            color: #ffffff;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav {
+            background: rgba(30, 58, 138, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #FBBF24;
+        }
+
+        .container {
+            padding: 30px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr {
+            transition: background-color 0.2s;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .empty-msg {
+            text-align: center;
+            margin-top: 30px;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .status-unanswered {
+            color: #f87171;
+            font-weight: bold;
+            background: rgba(239, 68, 68, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Unanswered Queries Log</h1>
+    </div>
+    <div class="nav">
+        <a href="{{ url_for('admin_dashboard') }}">Home</a>
+        <a href="{{ url_for('admin_queries') }}">Unanswered Queries</a>
+        <a href="{{ url_for('admin_manage_faq') }}">Manage FAQs</a>
+        <a href="{{ url_for('admin_upload_documents') }}">Upload Documents</a>
+        <a href="{{ url_for('admin_analytics') }}">Analytics</a>
+        <a href="{{ url_for('admin_logout') }}" style="color: #ffcccb;">Logout</a>
+    </div>
+    <div class="container">
+        {% if queries %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>User Query</th>
+                    <th>Confidence</th>
+                    <th>Status</th>
+                    <th>ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in queries %}
+                <tr>
+                    <td>{{ q.timestamp }}</td>
+                    <td>{{ q.query }}</td>
+                    <td>{{ q.confidence }}</td>
+                    <td class="status-unanswered">{{ q.status }}</td>
+                    <td style="font-size: 0.8em; color: gray;">{{ q.id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-msg">
+            <p>No unanswered queries found.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
