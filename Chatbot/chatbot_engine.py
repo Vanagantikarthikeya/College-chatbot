@@ -36,9 +36,8 @@ words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 model = pickle.load(open('model.pkl', 'rb'))
 
-# Define a confidence threshold (e.g., 0.50).
-# If the model isn't at least 50% sure, we shouldn't guess.
-# Since we use softmax, these are probabilities summing to 1.
+# Define a confidence threshold (e.g., 0.65).
+# If the model isn't at least 65% sure, we shouldn't guess.
 CONFIDENCE_THRESHOLD = 0.65
 
 # Document search relevance threshold
@@ -53,6 +52,31 @@ SYNONYMS = {
     "payment": "fee",
     "semester": "term",
     "course": "program"
+}
+
+# -------------------------------------------------------
+# KEYWORD OVERRIDE MAP
+# -------------------------------------------------------
+# For questions that are commonly misclassified, we directly
+# map keywords → intent tag. This bypasses the ML model.
+# Priority: keyword override → ML model → embeddings.
+KEYWORD_OVERRIDES = {
+    "college_contact": [
+        "location of the college", "where is the college", "college address",
+        "college location", "where is pec", "address of pec", "pec address",
+        "how to reach pec", "how to reach pallavi", "physical location",
+        "pincode", "kuntloor", "hayathnagar", "navigate to pec",
+        "distance from hyderabad", "nearest landmark"
+    ],
+    "colleges_website": [
+        "official website", "college website", "website link", "college portal",
+        "web address", "url of pec", "pec.ac.in", "student portal",
+        "online portal", "official site"
+    ],
+    "fee_structure": [
+        "fee structure", "tuition fee", "how much fee", "total fee",
+        "annual fee", "semester fee", "fee details", "fee amount"
+    ],
 }
 
 def normalize_synonyms(sentence):
@@ -350,10 +374,28 @@ def get_document_response(user_query, min_score=DOCUMENT_RELEVANCE_THRESHOLD):
 # Step 2: Two-Layer Static Knowledge Architecture
 # ---------------------------------------------------------
 
+def keyword_override_response(user_msg):
+    """
+    PRIORITY LAYER: Checks if the user message contains known trigger keywords
+    that map to a specific intent. This runs BEFORE the ML model.
+    Returns a response string or None.
+    """
+    msg_lower = user_msg.lower()
+    
+    for tag, phrases in KEYWORD_OVERRIDES.items():
+        for phrase in phrases:
+            if phrase in msg_lower:
+                print(f"[DEBUG] Keyword Override triggered: '{phrase}' → tag: {tag}")
+                for intent in intents['intents']:
+                    if intent['tag'] == tag:
+                        return random.choice(intent['responses'])
+    return None
+
 def search_permanent_knowledge(user_msg):
     """
     LAYER 1: Permanent Knowledge Base (Intents)
     
+    0. Keyword override check (fastest, most reliable).
     1. Uses ML Model (Bag of Words) to predict intent.
     2. If confidence >= threshold, returns intent response.
     3. Fallback: uses Sentence Embeddings (Semantic Similarity) if ML model is unsure.
@@ -361,6 +403,11 @@ def search_permanent_knowledge(user_msg):
     Returns:
         tuple: (response_string, confidence_score) or (None, confidence_score)
     """
+    # 0. Keyword Override Layer (highest priority)
+    override = keyword_override_response(user_msg)
+    if override:
+        return override, 1.0  # Max confidence for overrides
+
     # 1. Neural Network Prediction
     intents_list, confidence = predict_class(user_msg)
     
@@ -370,11 +417,11 @@ def search_permanent_knowledge(user_msg):
             return faq_response, confidence
             
     # 2. Semantic Embedding (Fallback within Layer 1)
-    # This helps catch matches that use different vocabulary but match an existing intent
-    embedding_response = get_embedding_response(user_msg, min_score=0.5)
+    # Threshold raised to 0.6 to avoid incorrect semantic matches
+    embedding_response = get_embedding_response(user_msg, min_score=0.60)
     if embedding_response:
         print("[DEBUG] Layer 1: Neural network unsure, but Embeddings found a match.")
-        return embedding_response, confidence # Return confidence of NN even if embedding used (or could use embedding score)
+        return embedding_response, confidence
         
     return None, confidence
 
